@@ -19,19 +19,53 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+// export default class App extends Component<{}> {
+//   render() {
+//     return (
+//       <Text>Hello world!</Text>
+//       // <View style={styles.container}>
+//       //   <Text style={styles.welcome}>
+//       //     Welcome to React Native!
+//       //   </Text>
+//       //   <Text style={styles.instructions}>
+//       //     To get started, edit App.js
+//       //   </Text>
+//       //   <Text style={styles.instructions}>
+//       //     {instructions}
+//       //   </Text>
+//       // </View>
+//     );
+//   }
+// }
+
+class Blink extends Component{
+  constructor(props){
+    super(props);
+    this.state = {showText: true};
+
+    setInterval(()=>{
+      this.setState(previousState=>{
+        return {showText: !previousState.showText};
+      });
+    }, 1000);
+  }
+
+  render() {
+    let display = this.state.showText ? this.props.text : ' ';
+    return (
+      <Text>{display}</Text>
+    );
+  }
+}
+
+export default class BlinkApp extends Component{
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+      <View>
+        <Blink text='I love to blink'/>
+        <Blink text='Yes blinking is so great'/>
+        <Blink text='Why did they ever take this out of HTML'/>
+        <Blink text='Look at me look at me look at me'/>
       </View>
     );
   }
